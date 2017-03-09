@@ -1,0 +1,6 @@
+[submodule "lib/pubsubclient"]
+	path = lib/pubsubclient
+	url = https://github.com/knolleary/pubsubclient.git
+[submodule "lib/ESP8266wifi"]
+	path = lib/ESP8266wifi
+	url = https://github.com/ekstrand/ESP8266wifi
