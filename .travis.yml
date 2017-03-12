@@ -15,6 +15,7 @@ before_install:
 install:
   - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs
   - arduino --install-boards esp8266:esp8266 --save-prefs
+  - arduino --pref "compiler.warning_level=all" --save-prefs
 #  - arduino --install-library "PubSubClient, ESP8266wifi"
   - git clone https://github.com/knolleary/pubsubclient.git /usr/local/share/arduino/libraries/PubSubClient
   - git clone https://github.com/ekstrand/ESP8266wifi /usr/local/share/arduino/libraries/ESP8266wifi
@@ -23,9 +24,8 @@ install:
 #Starts Build
 script:
   - "echo $PWD"
-  - "cd EazyExit"
   - "ls $PWD"
-  - arduino --verify --board esp8266:esp8266:generic $PWD/firmware/ESP8266.ino
+  - arduino -v --verbose-build --verify $PWD/firmware/ESP8266.ino
 
 notifications:
   email:
