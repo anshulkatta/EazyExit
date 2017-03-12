@@ -1,4 +1,7 @@
+# Choose Language, We're going to use GUI arduino IDE hence this doesn't matter
 language: c
+
+# Install Arduino IDE 1.6.11 and set build environment
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
@@ -8,6 +11,7 @@ before_install:
   - sudo mv arduino-1.6.11 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 
+# Install ESP8266 support, Dependencies and clone repo for build
   install:
   - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs
   - arduino --install-boards esp8266:esp8266
@@ -16,6 +20,7 @@ before_install:
   - arduino --install-library "pubsubclient, ESP8266wifi"
   - git clone https://github.com/Team-SDIoT/EazyExit.git cd EazyExit
 
+#Starts Build
   script:
   - "echo $PWD"
   - "echo $HOME"
