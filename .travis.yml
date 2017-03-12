@@ -1,26 +1,29 @@
+# Choose Language, We're going to use GUI arduino IDE hence this doesn't matter
 language: c
+
+# Install Arduino IDE 1.6.11 and set build environment
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
   - export DISPLAY=:1.0
-  - wget http://downloads.arduino.cc/arduino-1.6.11-linux64.tar.xz
-  - tar xf arduino-1.6.11-linux64.tar.xz
-  - sudo mv arduino-1.6.11 /usr/local/share/arduino
+  - wget http://downloads.arduino.cc/arduino-1.6.5-linux64.tar.xz
+  - tar xf arduino-1.6.5-linux64.tar.xz
+  - sudo mv arduino-1.6.5 /usr/local/share/arduino
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 
+# Install ESP8266 support, Dependencies and clone repo for build
   install:
   - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs
-  - arduino --install-boards esp8266:esp8266
-  - arduino --board esp8266:esp8266:generic --save-prefs
-  - arduino --pref "compiler.warning_level=all" --save-prefs
+  - arduino --install-boards esp8266:esp8266 --save-prefs
   - arduino --install-library "pubsubclient, ESP8266wifi"
-  - git clone https://github.com/Team-SDIoT/EazyExit.git cd EazyExit
+  - git clone https://github.com/Team-SDIoT/EazyExit.git
 
+#Starts Build
   script:
   - "echo $PWD"
-  - "echo $HOME"
+  - "cd EazyExit"
   - "ls $PWD"
-  - arduino -v --verbose-build --verify $PWD/firmware/ESP8266.ino
+  - arduino --verify --board esp8266:esp8266:generic $PWD/firmware/ESP8266.ino
 
   notifications:
   email:
