@@ -12,20 +12,20 @@ before_install:
   - sudo ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
 
 # Install ESP8266 support, Dependencies and clone repo for build
-  install:
+install:
   - arduino --pref "boardsmanager.additional.urls=http://arduino.esp8266.com/stable/package_esp8266com_index.json" --save-prefs
   - arduino --install-boards esp8266:esp8266 --save-prefs
   - arduino --install-library "pubsubclient, ESP8266wifi"
   - git clone https://github.com/Team-SDIoT/EazyExit.git
 
 #Starts Build
-  script:
+script:
   - "echo $PWD"
   - "cd EazyExit"
   - "ls $PWD"
   - arduino --verify --board esp8266:esp8266:generic $PWD/firmware/ESP8266.ino
 
-  notifications:
+notifications:
   email:
     on_success: change
     on_failure: change
