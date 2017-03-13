@@ -7,9 +7,10 @@
 
 ## Setting up MQTT Server/Broker (Raspberry Pi/Debian Equivalent)
 
-	- ``` sudo apt-get update
-	-     sudo apt-get install mosquito mosquito-clients```
-- Mosquito broker will automatically start running on <your_pi_ip_address> port 1883
+	- ``` sudo apt-get update ```
+	- ``` sudo apt-get install mosquito mosquito-clients ```
+
+  - Mosquito broker will automatically start running on <your_pi_ip_address> port 1883
 
 ## Setting up Development and Build system
 
@@ -25,15 +26,15 @@
 	- ``` cd EazyExit ```
 
 - Fetch submodules/dependent libraries using:
-	- ```git submodule init```
-	- ```git submodule update```
+	- ``` git submodule init ```
+	- ``` git submodule update ```
 
 - In case that doesn’t work
 	- ``` cd lib ```
-	- ```git clone https://github.com/knolleary/pubsubclient.git PubSubClient```
-	- ```git clone https://github.com/ekstrand/ESP8266wifi ``
+	- ``` git clone https://github.com/knolleary/pubsubclient.git PubSubClient ```
+	- ``` git clone https://github.com/ekstrand/ESP8266wifi ```
 
-- Edit /lib/credentials/credentials.h and add your WiFi SSID, WiFi password and IP address of server(Raspberry Pi) running MQTT broker
+- Edit "/lib/credentials/credentials.h" and add your WiFi SSID, WiFi password and IP address of server(Raspberry Pi) running MQTT broker
 
 - Edit GPIO pin number /src/ESP8266.cpp if required default is pin D0 on which on-board LED is connected
 
@@ -54,7 +55,7 @@
 	- ``` EazyExit/.pioenvs/<Targer_Board> binary —> firmware.bin```
 
 - Flash using esp_tool:
-	- ``` esptool.py -p <COMM_PORT> —baud 460800 write_flash —flash_size detect 0 firmware.bin
+	- ``` esptool.py -p <COMM_PORT> —baud 460800 write_flash —flash_size detect 0 firmware.bin ```
 ## TEST
 
 - ESP node listens to MQTT messages<onn/off> on topic myHome
