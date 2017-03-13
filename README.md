@@ -25,7 +25,7 @@
 	- ``` git clone https://github.com/Team-SDIoT/EazyExit.git ```
 	- ``` cd EazyExit ```
 
-- Fetch submodules/dependent libraries using:
+- Fetch latest versions of submodules/dependent libraries using:
 	- ``` git submodule init ```
 	- ``` git submodule update ```
 
@@ -61,5 +61,10 @@
 - ESP node listens to MQTT messages<onn/off> on topic myHome
 - On raspberry pi run ``` mosquitto_pub -t myHome -m off ``` LED should be off and ``` mosquitto_pub -t myHome -m one ``` LED should turn on.
 
+## Development Environment setup:
+
+- Download PlatformIO official IDE "http://platformio.org/platformio-ide" or PlatformIO Plugin for ATOM IDE (http://www.atom.io)
+
 ## TODO
+
 - Setup continuous integration with TRAVIS CI and continuous deployment using ESP8266 OTA firmware updates.
