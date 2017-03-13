@@ -13,7 +13,7 @@
 
 //Add your WiFi and MQTT topic credentials below
 
-const char* ssid = "........";
-const char* password = "........";
-const char* mqtt_server = "........"; //Address or IP
+const char* ssid = "NEXTRA1918";
+const char* password = "pradeepkumar";
+const char* mqtt_server = "192.168.1.119"; //Address or IP
 const char* topic = "myHome";
