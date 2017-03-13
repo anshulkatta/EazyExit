@@ -3,15 +3,12 @@
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
     */
 
 
@@ -23,15 +20,19 @@ ESP8266 firmware acting as MQTT endpoint for EazyExit home automation solution.
 
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-#include "credentials.h"
+#include <credentials.h>
 
 #define RELAY D0
 #define SERIAL_DEBUG 1 //Enable this for optional serial debugging
 
 
-
+//Client as instance
 WiFiClient espClient;
 PubSubClient client(espClient);
+
+//Declare functions
+void setup_wifi();
+void callback(char* , byte* , unsigned int);
 
 void setup() {
 
@@ -69,13 +70,11 @@ void setup_wifi() {
   #endif
 }
 
-
-
 void callback(char* topic, byte* payload, unsigned int length) {
 
   char p[length + 1];
   memcpy(p, payload, length);
-  p[length] = NULL;
+  p[length] = 0;
   String message(p);
 
   #if SERIAL_DEBUG
@@ -87,11 +86,9 @@ void callback(char* topic, byte* payload, unsigned int length) {
   if(message == "off")
   digitalWrite(RELAY,HIGH);
 
-
   if(message == "onn")
   digitalWrite(RELAY,LOW);
   }
-
 
 void reconnect() {
 
@@ -108,8 +105,7 @@ void reconnect() {
       Serial.println("connected");
       #endif
       client.subscribe(topic);
-
-    }
+}
 
     else {
       #if SERIAL_DEBUG
