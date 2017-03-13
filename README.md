@@ -7,9 +7,9 @@
 
 ## Setting up MQTT Server/Broker (Raspberry Pi/Debian Equivalent)
 
-	- ``` sudo apt-get update ```
-	- ``` sudo apt-get install mosquito mosquito-clients```
-	- Mosquito broker will automatically start running on <your_pi_ip_address> port 1883
+	- ``` sudo apt-get update
+	-     sudo apt-get install mosquito mosquito-clients```
+- Mosquito broker will automatically start running on <your_pi_ip_address> port 1883
 
 ## Setting up Development and Build system
 
