@@ -2,6 +2,9 @@
 
 ## Changelog:
 
+17/03/2017:
+- Added WiFiManager(https://github.com/tzapu/WiFiManager.git) support to dynamically manage WiFi connections.
+
 13/03/2017:
 - Added PlatformIO(http://platformio.org) development and Build support
 
