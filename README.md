@@ -2,6 +2,9 @@
 
 ## Changelog:
 
+17/03/2017:
+- Added WiFiManager(https://github.com/tzapu/WiFiManager.git) support to dynamically manage WiFi connections.
+
 13/03/2017:
 - Added PlatformIO(http://platformio.org) development and Build support
 
@@ -29,10 +32,11 @@
 	- ``` git submodule init ```
 	- ``` git submodule update ```
 
-- In case that doesn’t work
+- In case above step doesn’t work clone libraries manually
 	- ``` cd lib ```
 	- ``` git clone https://github.com/knolleary/pubsubclient.git PubSubClient ```
 	- ``` git clone https://github.com/ekstrand/ESP8266wifi ```
+	- ``` git clone https://github.com/tzapu/WiFiManager.git ```
 
 - Edit "/lib/credentials/credentials.h" and add your WiFi SSID, WiFi password and IP address of server(Raspberry Pi) running MQTT broker
 
