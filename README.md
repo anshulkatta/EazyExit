@@ -2,6 +2,9 @@
 
 ## Changelog:
 
+20/03/2017
+- Added WPS support, push WPS button on router to connect to node during power on.
+
 17/03/2017:
 - Added WiFiManager(https://github.com/tzapu/WiFiManager.git) support to dynamically manage WiFi connections.
 
