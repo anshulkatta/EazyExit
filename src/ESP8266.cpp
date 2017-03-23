@@ -25,7 +25,7 @@ ESP8266 firmware acting as MQTT endpoint for EazyExit home automation solution.
 #include <ESP8266WebServer.h>
 #include <WiFiManager.h>
 
-#define RELAY D0
+#define RELAY D0 //Define pin for load
 #define SERIAL_DEBUG 1 //Enable this for optional serial debugging
 #define CREDENTIALS_PROVIDED 0
 
@@ -35,9 +35,12 @@ WiFiManager wifiManager;
 PubSubClient client(espClient);
 
 //Declare functions
-void setup_wifi();
-void callback(char* , byte* , unsigned int);
-
+bool isConnected(); //To check connection if node is connected to Access Point
+void setup_wps(); //To setup WPS connection with Access Point
+void setup_wifi(); //Fallback, to use WiFi manager for connection
+void callback(char* , byte* , unsigned int); // Function executes whenever MQTT message arrives
+void getIP(); //Print MAC_Address,IP address and other info
+//Program starts here:
 void setup() {
 
   #if SERIAL_DEBUG
@@ -45,11 +48,49 @@ void setup() {
   #endif
 
   pinMode(RELAY,OUTPUT); //Configure Pin as Output
-  setup_wifi();
+  setup_wps(); //Start with WPS type connection
 
-  client.setServer(mqtt_server, 1883);
-  client.setCallback(callback);
+  if(!isConnected()){
+      #if SERIAL_DEBUG
+      Serial.println("TIMEOUT, starting WiFi Manager");
+      #endif
+      setup_wifi(); //Fallback! Manual connection if WPS fails.
+  }
 
+  else{
+    #if SERIAL_DEBUG
+    getIP();
+    #endif
+  }
+
+  client.setServer(mqtt_server, 1883); //Set MQTT server in 'credentials.h'
+  client.setCallback(callback); //Set MQTT callback function, which executes whenever MQTT message arrives
+}
+
+void setup_wps(){
+
+  #if SERIAL_DEBUG
+  Serial.println("WPS MODE ACTIVATED!");
+  #endif
+  WiFi.mode(WIFI_STA); //Set up station mode for WPS to work
+  WiFi.beginWPSConfig(); //Start WPS connection
+  delay(10000); //10 seconds timeout
+}
+
+bool isConnected(){
+
+  if (WiFi.status()!= WL_CONNECTED){
+    #if SERIAL_DEBUG
+    Serial.println("NOT CONNECTED TO AP");
+    #endif
+    return false;
+  }
+  else{
+    #if SERIAL_DEBUG
+    Serial.println("CONNECTED TO AP");
+    #endif
+    return true;
+  }
 }
 
 void setup_wifi() {
@@ -59,22 +100,35 @@ void setup_wifi() {
   #if CREDENTIALS_PROVIDED
   Serial.println("Connecting to ");
   Serial.println(ssid);
-  WiFi.begin(ssid, password);
+  WiFi.begin(ssid, password);  //Connect using credentials provided in credentials.h file
 
   #else
   Serial.println("Cannot find router, Starting WiFiManager Access Point");
-  wifiManager.autoConnect("AutoConnectAP");
+  wifi_wps_disable(); //Disable WPS mode for fallback to work
+  wifiManager.autoConnect("AutoConnectAP"); //Connect using WiFi manager, if no known network in range or credentials not provided
 
   #endif
-
-  while (WiFi.status() != WL_CONNECTED) {
   delay(500);
-  }
 
+  if(!isConnected()){
+
+        delay(2000); // 2 seconds timeout
+        #if SERIAL_DEBUG
+        Serial.println("TIMEOUT, Restarting Node");
+        #endif
+        ESP.reset(); //If all methods fails reset ESP
+    }
+  else{
+      #if SERIAL_DEBUG
+      getIP();
+      #endif
+  }
+}
+
+void getIP(){
   #if SERIAL_DEBUG
-  Serial.println("WiFi connected");
   Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  Serial.print(WiFi.localIP());
   #endif
 }
 
@@ -104,7 +158,7 @@ void reconnect() {
   while (!client.connected()) {
 
     #if SERIAL_DEBUG
-    Serial.print("Attempting MQTT connection...");
+    Serial.println("Attempting MQTT connection...");
     #endif
 
     // Attempt to connect
