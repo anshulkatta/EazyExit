@@ -1,9 +1,9 @@
 [submodule "lib/ESP8266wifi"]
-	path = lib/ESP8266wifi
+	path = EazyExit-Node/lib/ESP8266wifi
 	url = https://github.com/ekstrand/ESP8266wifi
 [submodule "lib/PubSubClient"]
-	path = lib/PubSubClient
+	path = EazyExit-Node/lib/PubSubClient
 	url = https://github.com/knolleary/pubsubclient.git
 [submodule "lib/WiFiManager"]
-	path = lib/WiFiManager
+	path = EazyExit-Node/lib/WiFiManager
 	url = https://github.com/tzapu/WiFiManager.git
