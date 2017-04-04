@@ -2,6 +2,9 @@
 
 ## Changelog:
 
+04/04/2017
+- Added JAVA EazyExit server code
+
 20/03/2017
 - Added WPS support, push WPS button on router to connect to node during power on.
 
@@ -36,21 +39,25 @@
 	- ``` git submodule update ```
 
 - In case above step doesn’t work clone libraries manually
-	- ``` cd lib ```
+	- ``` cd EazyExit/EazyExit-Node/lib ```
 	- ``` git clone https://github.com/knolleary/pubsubclient.git PubSubClient ```
 	- ``` git clone https://github.com/ekstrand/ESP8266wifi ```
 	- ``` git clone https://github.com/tzapu/WiFiManager.git ```
 
-- Edit "/lib/credentials/credentials.h" and add your WiFi SSID, WiFi password and IP address of server(Raspberry Pi) running MQTT broker
+- Edit "EazyExit/EazyExit-Node/lib/credentials/credentials.h" and add your WiFi SSID, WiFi password and IP address of server(Raspberry Pi) running MQTT broker
 
-- Edit GPIO pin number /src/ESP8266.cpp if required default is pin D0 on which on-board LED is connected
+- Edit GPIO pin number EazyExit/EazyExit-Node/src/ESP8266.cpp if required default is pin D0 on which on-board LED is connected
 
-- Build project using following command:
+- Build firmware using following command:
+	- ``` cd EazyExit-Node ```
 	- ``` pio run ``` // Note: This will build and generate binaries for all supportive hardware
 	- ``` pio run -r nodemcu ``` // Note: This will build and generate binary only for nodemcu hardware
 
-- Build and flash directly to the board using following command:
-	- ``` pio run -e nodemcu -t upload ``` // Note: This will flash binary to board connected via USB, Serial port will be auto detected
+- Build Server code using following command:
+	- ``` cd EazyExit/EazyExit-Server ```
+	- ``` change JAVA_HOME in setenv.sh ```
+	- ``` run build.sh as bash build.sh or make it executable to run as ./build.sh ```
+	- ``` run deploy.sh in the folder where Deployable.tar resides ```
 
 - To manually flash the binary you will need to install esptool:
 	- ``` sudo pip install esptool ```
@@ -63,6 +70,7 @@
 
 - Flash using esp_tool:
 	- ``` esptool.py -p <COMM_PORT> —baud 460800 write_flash —flash_size detect 0 firmware.bin ```
+
 ## TEST
 
 - ESP node listens to MQTT messages<onn/off> on topic myHome
