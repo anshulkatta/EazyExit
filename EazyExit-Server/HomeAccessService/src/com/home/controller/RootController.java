@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RootController {
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String root() {
 		return "UserManagement";
-	}
+	}*/
 	
-	@RequestMapping(value = "/getNodes", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getNodes() {
 		return "NodeManagement";
 	}

@@ -9,6 +9,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<context:component-scan base-package="com.home" />
+	<context:component-scan base-package="com.helper" />
 	<context:component-scan base-package="com.user" />
 	<context:component-scan base-package="com.node" />
 

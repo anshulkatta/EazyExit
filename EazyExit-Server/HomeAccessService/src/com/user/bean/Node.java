@@ -2,7 +2,7 @@ package com.user.bean;
 
 public class Node {
 
-	private long id;
+	private String ip;
 
 	private String nodename;
 	
@@ -18,8 +18,8 @@ public class Node {
 
 	public Node(){}
 	
-	public Node(long id , String nodename) {
-		this.id = id;
+	public Node(String ip , String nodename) {
+		this.ip = ip;
 		this.nodename= nodename;
 	}
 
@@ -30,13 +30,15 @@ public class Node {
 	public void setNodename(String nodename) {
 		this.nodename = nodename;
 	}
-
-	public long getId() {
-		return id;
+	
+	public String getIp() {
+		return ip;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
+
+	
 
 }

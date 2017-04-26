@@ -1,7 +1,6 @@
 package com.node;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -13,15 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class NodePing {
 	
-	public String ping() {
+	public String ping(String content) {
 
         String topic        = "myHome";
-        String content      = "On";
         int qos             = 2;
         String ip=getIP();
         System.out.println(ip);
         String broker       = "tcp://"+ip+":1883";
-        String clientId     = "JavaSample";
+        String clientId     = "Ping";
         MemoryPersistence persistence = new MemoryPersistence();
 
         try {
