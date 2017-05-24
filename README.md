@@ -14,8 +14,16 @@
 13/03/2017:
 - Added PlatformIO(http://platformio.org) development and Build support
 
-## Setting up MQTT Server/Broker (Raspberry Pi/Debian Equivalent)
+30/04/2017:
+- Added Node UUID based on Hash generated from MAC Address
 
+24/05/2017:
+- Added DNS support for NODE to avoid hardcoding MQTT server IP in firmware(IP ---> eazyexit.lan)
+
+
+## Setting up Raspberry pi to act as MQTT Server/Broker (Raspberry Pi/Debian Equivalent)
+	Change hostname from raspberrypi to eazy exit using below command and then download required packages:
+	- ``` sudo raspi-config > Advanced Options > hostnames to eazyexit```
 	- ``` sudo apt-get update ```
 	- ``` sudo apt-get install mosquito mosquito-clients ```
 
