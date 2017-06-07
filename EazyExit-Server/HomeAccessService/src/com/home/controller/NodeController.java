@@ -13,7 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.helper.Util;
 import com.home.service.NodeService;
 import com.user.bean.Node;
-
+/**
+ * Controller for /node context Mapping
+ * 
+ * provides access to interface with Node
+ * 
+ * @author Anshul
+ *
+ */
 @Controller
 @RequestMapping("/node")
 public class NodeController {
@@ -21,6 +28,11 @@ public class NodeController {
 	@Autowired
 	NodeService nodeService;
 	
+	/**
+	 * Discover Node Implementation
+	 * @param mav
+	 * @return
+	 */
 	@RequestMapping(value = "/discover", method = RequestMethod.GET)
 	public ModelAndView getDiscoveredNodes(ModelAndView mav) {
 		mav.setViewName("DiscoveredNodes");
@@ -28,8 +40,12 @@ public class NodeController {
 		return mav;
 	}
 	
+	/**
+	 * Broadcast Message ON to node
+	 * @return HTTP 200
+	 */
 	@RequestMapping(value = "/on", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> listAllNodes() {
+    public ResponseEntity<Boolean> turnONNodes() {
         boolean flag = nodeService.broadCastMessage(Util.MESSAGE_ON);
         if(flag){
             return new ResponseEntity<Boolean>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
@@ -37,8 +53,12 @@ public class NodeController {
         return new ResponseEntity<Boolean>(flag, HttpStatus.OK);
     }
     
+	/**
+	 * Broadcast Message OFF to node
+	 * @return HTTP 200
+	 */
     @RequestMapping(value = "/off", method = RequestMethod.GET)
-    public ResponseEntity<Boolean> turnoffNode() {
+    public ResponseEntity<Boolean> turnoffNodes() {
     	Boolean flag = nodeService.broadCastMessage(Util.MESSAGE_OFF);
         if(flag){
             return new ResponseEntity<Boolean>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND

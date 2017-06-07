@@ -1,8 +1,16 @@
 package com.user.bean;
 
-public class Node {
+import java.io.Serializable;
 
-	private String ip;
+public class Node  implements Serializable{
+
+	
+	/**  Dont touch this
+	 *   @Long value only
+	 */
+	private static final long serialVersionUID = -89756413215632L;
+
+	private String uniqueId;
 
 	private String nodename;
 	
@@ -18,8 +26,8 @@ public class Node {
 
 	public Node(){}
 	
-	public Node(String ip , String nodename) {
-		this.ip = ip;
+	public Node(String uniqueId , String nodename) {
+		this.uniqueId = uniqueId;
 		this.nodename= nodename;
 	}
 
@@ -31,12 +39,28 @@ public class Node {
 		this.nodename = nodename;
 	}
 	
-	public String getIp() {
-		return ip;
+	public String getUniqueId() {
+		return uniqueId;
 	}
 
-	public void setIp(String ip) {
-		this.ip = ip;
+	public void setUniqueId(String uniqueId) {
+		this.uniqueId = uniqueId;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Node n = (Node) obj;
+		if(n.getUniqueId().equals(this.uniqueId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 
 	
