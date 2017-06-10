@@ -21,7 +21,7 @@
 		<c:forEach items="${nodesList}" var="node">
 				<tbody>
 					<tr>
-						<td><c:out value="${node.ip}" /></td>
+						<td><c:out value="${node.uniqueId}" /></td>
 						<td><c:out value="${node.nodename}" /></td>
 					</tr>
 				</tbody>

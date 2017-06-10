@@ -14,6 +14,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class MqTTTUtil implements MqttCallback {
 	
@@ -23,7 +24,6 @@ public class MqTTTUtil implements MqttCallback {
 	private String topicNameRecv = "discover2";
 	private String mqtturl = "tcp://localhost:1883";
 	private List<String> messageRecieved = new ArrayList<String>();
-	
 	
 
 	@PostConstruct
@@ -62,13 +62,8 @@ public class MqTTTUtil implements MqttCallback {
 
 	@Override
 	public void messageArrived(String topic, MqttMessage message)
-			throws Exception {
-		
-		messageRecieved.add(message.toString());
-		/*if(message.toString().equals(iphash)) {
-			System.out.println("I am up");
-			sendMessage("I am up");
-		}*/
+			throws Exception {		
+		messageRecieved.add(message.toString());		
 	}
 
 	@Override

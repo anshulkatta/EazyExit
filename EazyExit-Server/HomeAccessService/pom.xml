@@ -6,6 +6,7 @@
 	<version>1</version>
 	<packaging>war</packaging>
 	<properties>
+		<deploydir>/root/Downloads/apache-tomcat-7.0.76/webapps</deploydir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<springframework.version>4.3.1.RELEASE</springframework.version>
 		<jackson.version>2.7.5</jackson.version>
@@ -47,6 +48,11 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.0.5</version>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -66,6 +72,7 @@
 				<configuration>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<outputDirectory>${deploydir}</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
