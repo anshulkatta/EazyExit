@@ -2,6 +2,9 @@
 
 ## Changelog:
 
+10//06/2017
+- Added DB support and Node discovery feature. 
+
 04/04/2017
 - Added JAVA EazyExit server code
 
